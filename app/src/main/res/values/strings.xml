@@ -11,9 +11,4 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
-    <string name="sign_up_error_message">"Your input has empty area, please check! "</string>
-    <string name="sign_up_error_title">Oops!</string>
-    <string name="login_error_tittle">Oops!</string>
-    <string name="login_error_message">Your email or password is null, please check!</string>
-    <string name="menu_logout_label">Logout</string>
 </resources>
