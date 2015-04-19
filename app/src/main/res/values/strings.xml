@@ -15,4 +15,6 @@
     <string name="login_error_tittle">Oops!</string>
     <string name="login_error_message">Your email or password is null, please check!</string>
     <string name="menu_logout_label">Logout</string>
+    <string name="empty_inbox_label">No new messages!</string>
+    <string name="empty_friends_label">Add friends to begin!</string>
 </resources>
