@@ -33,9 +33,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public static final int TAKE_VIDEO_REQUEST = 1;
     public static final int PICK_PHOTO_REQUEST = 2;
     public static final int PICK_VIDEO_REQUEST = 3;
-    public static final int MEDIA_TYPE_IMAGE   = 4;
-    public static final int MEDIA_TYPE_VIDEO   = 5;
-    public static final int FIZE_SIZE_LIMIT    = 1024*1024*10;//10MB
+    public static final int MEDIA_TYPE_IMAGE = 4;
+    public static final int MEDIA_TYPE_VIDEO = 5;
+    public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10;//10MB
     protected Uri mMediaUri;
 
     /**
@@ -59,15 +59,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         setContentView(R.layout.activity_main);
         //Check if user is logged in
         /** Whenever you use any signup or login methods, the user is cached on disk.
-            You can treat this cache as a session, and automatically assume the user is logged in
-            It would be bothersome if the user had to log in every time they open your app.
-            You can avoid this by using the cached currentUser object.
+         You can treat this cache as a session, and automatically assume the user is logged in
+         It would be bothersome if the user had to log in every time they open your app.
+         You can avoid this by using the cached currentUser object.
          **/
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser == null) {
+        if (currentUser == null) {
             navigateToLogin();
-        }
-        else {
+        } else {
             Toast.makeText(MainActivity.this, "Welcome, " + currentUser.getUsername(), Toast.LENGTH_LONG).show();
         }
 
@@ -114,7 +113,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         startActivity(intent);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -159,11 +157,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                                     case 1: //Take video
                                         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                                         mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
-                                        if(mMediaUri == null){
+                                        if (mMediaUri == null) {
                                             Toast.makeText(MainActivity.this, R.string.external_storage_error,
                                                     Toast.LENGTH_LONG).show();
-                                        }
-                                        else {
+                                        } else {
                                             takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                                             takeVideoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
                                             takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3);
@@ -201,8 +198,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                                     // between applications and persist after your app has been uninstalled.
                                     //2.Create our subDirectory
                                     // Create the storage directory if it does not exist
-                                    if (! mediaStorageDir.exists()){
-                                        if (! mediaStorageDir.mkdirs()){
+                                    if (!mediaStorageDir.exists()) {
+                                        if (!mediaStorageDir.mkdirs()) {
                                             Toast.makeText(MainActivity.this, "failed to create directory",
                                                     Toast.LENGTH_LONG).show();
                                             return null;
@@ -213,19 +210,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                                     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA)
                                             .format(new Date());
                                     File mediaFile;
-                                    if (mediaType == MEDIA_TYPE_IMAGE){
+                                    if (mediaType == MEDIA_TYPE_IMAGE) {
                                         mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                                                "IMG_"+ timeStamp + ".jpg");
-                                    } else if(mediaType == MEDIA_TYPE_VIDEO) {
+                                                "IMG_" + timeStamp + ".jpg");
+                                    } else if (mediaType == MEDIA_TYPE_VIDEO) {
                                         mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                                                "VID_"+ timeStamp + ".mp4");
+                                                "VID_" + timeStamp + ".mp4");
                                     } else {
                                         return null;
                                     }
                                     //5.Return the file's Uri
                                     return Uri.fromFile(mediaFile);
-                                }
-                                else {
+                                } else {
                                     return null;
                                 }
                             }
@@ -254,96 +250,120 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == TAKE_PHOTO_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                // Image captured and saved to fileUri specified in the Intent
-                Toast.makeText(this, "Image saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-                // invoke the system's media scanner to add your photo to the Media Provider's database,
-                // making it available in the Android Gallery application and to other apps.
-                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                mediaScanIntent.setData(mMediaUri);
-                sendBroadcast(mediaScanIntent);
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the image capture
-                Toast.makeText(this, "User canceled the image capture!", Toast.LENGTH_LONG).show();
-            } else {
-                // Image capture failed, advise user
-                Toast.makeText(this, "Image capture failed, pleas try again!", Toast.LENGTH_LONG).show();
-            }
+        String fileType = null;
+        if(requestCode == TAKE_PHOTO_REQUEST || requestCode == PICK_PHOTO_REQUEST){
+            fileType = ParseConstants.TYPE_IMAGE;
         }
-        if(requestCode == TAKE_VIDEO_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                // Video captured and saved to fileUri specified in the Intent
-                Toast.makeText(this, "Video saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                mediaScanIntent.setData(mMediaUri);
-                sendBroadcast(mediaScanIntent);
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the video capture
-                Toast.makeText(this, "User canceled the video capture!", Toast.LENGTH_LONG).show();
-            } else {
-                // Video capture failed, advise user
-                Toast.makeText(this, "Video capture failed, pleas try again!", Toast.LENGTH_LONG).show();
-            }
+        else if(requestCode == TAKE_VIDEO_REQUEST || requestCode == PICK_VIDEO_REQUEST){
+            fileType = ParseConstants.TYPE_VIDEO;
         }
-        if(requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST){
-            if(resultCode == RESULT_OK){
-                if(data == null){
-                    Toast.makeText(this, "There was an error, please try again!", Toast.LENGTH_LONG).show();
-                }else {
+        Intent recipientsIntent = new Intent(this, RecipientsActivity.class);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case TAKE_PHOTO_REQUEST:
+                    // Image captured and saved to fileUri specified in the Intent
+                    Toast.makeText(this, "Image saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
+                    // invoke the system's media scanner to add your photo to the Media Provider's database,
+                    // making it available in the Android Gallery application and to other apps.
+                    Intent photoScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    photoScanIntent.setData(data.getData());
+                    sendBroadcast(photoScanIntent);
                     mMediaUri = data.getData();
-                }
-                Toast.makeText(this, "Media URI: " + mMediaUri, Toast.LENGTH_LONG).show();
-                if(requestCode == PICK_VIDEO_REQUEST){
-                    //make sure the file is less than 10MB
-                    int fileSize = 0;
-                    InputStream inputStream = null;
-                    try {
-                        inputStream = getContentResolver().openInputStream(mMediaUri);
-                        fileSize = inputStream.available();
-                    } catch (FileNotFoundException e) {
-                        Toast.makeText(this, "FileNotFoundException: " + e, Toast.LENGTH_LONG).show();
-                        return;
-                    } catch (IOException e) {
-                        Toast.makeText(this, "IOException: " + e, Toast.LENGTH_LONG).show();
-                        return;
+                    Toast.makeText(this, "Media URI: " + mMediaUri, Toast.LENGTH_LONG).show();
+                    recipientsIntent.setData(mMediaUri);
+                    recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                    startActivity(recipientsIntent);
+                    break;
+
+                case TAKE_VIDEO_REQUEST:
+                    // Video captured and saved to fileUri specified in the Intent
+                    Toast.makeText(this, "Video saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
+                    Intent videoScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    videoScanIntent.setData(data.getData());
+                    sendBroadcast(videoScanIntent);
+                    mMediaUri = data.getData();
+                    Toast.makeText(this, "Media URI: " + mMediaUri, Toast.LENGTH_LONG).show();
+                    recipientsIntent.setData(mMediaUri);
+                    recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                    startActivity(recipientsIntent);
+                    break;
+
+                case PICK_PHOTO_REQUEST:
+                    if (data == null) {
+                        Toast.makeText(this, "There was an error, please try again!", Toast.LENGTH_LONG).show();
+                    } else {
+                        mMediaUri = data.getData();
+                        Toast.makeText(this, "Media URI: " + mMediaUri, Toast.LENGTH_LONG).show();
+                        recipientsIntent.setData(mMediaUri);
+                        recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                        startActivity(recipientsIntent);
                     }
-                    finally {
+                    break;
+
+                case PICK_VIDEO_REQUEST:
+                    if (data == null) {
+                        Toast.makeText(this, "There was an error, please try again!", Toast.LENGTH_LONG).show();
+                    } else {
+                        //make sure the file is less than 10MB
+                        int fileSize = 0;
+                        InputStream inputStream = null;
                         try {
-                            inputStream.close();
-                        } catch (IOException e) {/**Intentionally blank */ }
+                            inputStream = getContentResolver().openInputStream(data.getData());
+                            fileSize = inputStream.available();
+                        } catch (FileNotFoundException e) {
+                            Toast.makeText(this, "FileNotFoundException: " + e, Toast.LENGTH_LONG).show();
+                            return;
+                        } catch (IOException e) {
+                            Toast.makeText(this, "IOException: " + e, Toast.LENGTH_LONG).show();
+                            return;
+                        } finally {
+                            try {
+                                if (inputStream != null) {
+                                    inputStream.close();
+                                }
+                            } catch (IOException e) {/**Intentionally blank */}
+                        }
+                        if (fileSize >= FILE_SIZE_LIMIT) {
+                            Toast.makeText(this, "The selected video is too large, please try a litter one ^.^",
+                                    Toast.LENGTH_LONG).show();
+                        }else {
+                            mMediaUri = data.getData();
+                            Toast.makeText(this, "Media URI: " + mMediaUri, Toast.LENGTH_LONG).show();
+                            recipientsIntent.setData(mMediaUri);
+                            recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                            startActivity(recipientsIntent);
+                        }
                     }
-                    if(fileSize >= FIZE_SIZE_LIMIT){
-                        Toast.makeText(this, "The selected video is too large, please try a litter one ^.^",
-                                Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                }
+                    break;
             }
-            else if(resultCode == RESULT_CANCELED){
-                Toast.makeText(this, "User canceled pick!", Toast.LENGTH_LONG).show();
-            }
-            else {
-                Toast.makeText(this, "Pick error, pleas try again!", Toast.LENGTH_LONG).show();
-            }
+        }
+        else if (resultCode == RESULT_CANCELED) {
+            // User cancelled the media capture
+            Toast.makeText(this, "User canceled the media capture or pick!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            // Media capture failed, advise user
+            Toast.makeText(this, "Media capture or pick failed, pleas try again!", Toast.LENGTH_LONG).show();
         }
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        // When the given tab is selected, switch to the corresponding page in
-        // the ViewPager.
-        mViewPager.setCurrentItem(tab.getPosition());
-    }
+        @Override
+        public void onTabSelected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
+            // When the given tab is selected, switch to the corresponding page in
+            // the ViewPager.
+            mViewPager.setCurrentItem(tab.getPosition());
+        }
 
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
+        @Override
+        public void onTabUnselected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
+        }
 
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
+        @Override
+        public void onTabReselected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
+        }
+
+
+ }
 
 
 
-}

@@ -27,6 +27,8 @@
         <item>Choose picture</item>
         <item>Choose video</item>
     </string-array>
+    <string name="title_activity_recipients">Choose Recipients</string>
+    <string name="recipents_remind_label">Choose one or More friends to send your cake!</string>
 
 
 </resources>

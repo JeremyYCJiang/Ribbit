@@ -130,7 +130,7 @@ public class EditFriendsActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        if(getListView().isItemChecked(position)){
+        if(l.isItemChecked(position)){
             //Add friends if item is checked after item been touched
             //locally
             mFriendsRelation.add(mParseUsers.get(position));
@@ -156,7 +156,5 @@ public class EditFriendsActivity extends ListActivity {
                 }
             });
         }
-
-
     }
 }
