@@ -38,6 +38,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10;//10MB
     protected Uri mMediaUri;
 
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -105,6 +106,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             .setTabListener(this));
         }
     }
+
+
 
     private void navigateToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
