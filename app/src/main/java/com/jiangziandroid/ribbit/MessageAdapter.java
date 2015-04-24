@@ -1,6 +1,8 @@
 package com.jiangziandroid.ribbit;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 import java.util.List;
@@ -79,7 +82,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext, "test", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), "Media loading...", Toast.LENGTH_LONG).show();
+            ParseObject message = mMessages.get(getLayoutPosition());
+            String messageType = message.getString(ParseConstants.KEY_FILE_TYPE);
+            ParseFile file = message.getParseFile(ParseConstants.KEY_FILE);
+            Uri fileUri = Uri.parse(file.getUrl());
+            if(messageType.equals(ParseConstants.TYPE_IMAGE)){
+                //View the image
+                Intent intent = new Intent(v.getContext(), ViewImageActivity.class);
+                intent.setData(fileUri);
+                v.getContext().startActivity(intent);
+            }
+            else if (messageType.equals(ParseConstants.TYPE_VIDEO)){
+                //View the video
+                Intent intent = new Intent(Intent.ACTION_VIEW, fileUri);
+                intent.setDataAndType(fileUri, "video/*");
+                v.getContext().startActivity(intent);
+            }
         }
     }
 
