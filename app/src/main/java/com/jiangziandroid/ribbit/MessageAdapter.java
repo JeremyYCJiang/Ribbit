@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -99,9 +101,29 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 intent.setDataAndType(fileUri, "video/*");
                 v.getContext().startActivity(intent);
             }
+            //delete message
+            List<String> recipientIds = message.getList(ParseConstants.KEY_RECIPIENT_IDS);
+            if(recipientIds.size() == 1){
+                //last recipient - delete the whole thing!
+                message.deleteInBackground();
+            }
+            else {
+                //remove the recipient and save
+                //remove UserId locally
+                recipientIds.remove(ParseUser.getCurrentUser().getObjectId());
+                //remove UserId back-end
+                ArrayList<String> idsTobeRemoved = new ArrayList<>();
+                idsTobeRemoved.add(ParseUser.getCurrentUser().getObjectId());
+                message.removeAll(ParseConstants.KEY_RECIPIENT_IDS, idsTobeRemoved);
+                message.saveInBackground();
+            }
         }
     }
 
-
+    public void refill(List<ParseObject> receivedMessages){
+        mMessages.clear();
+        mMessages.addAll(receivedMessages);
+        notifyDataSetChanged();
+    }
 
 }

@@ -45,10 +45,17 @@ public class InboxFragment extends Fragment{
                     mReceivedMessages = messages;
                     MessageAdapter messageAdapter = new MessageAdapter(getActivity().getApplicationContext(), mReceivedMessages);
                     mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.inboxRecyclerView);
-                    mRecyclerView.setAdapter(messageAdapter);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
+                    if(mRecyclerView.getAdapter() == null){
+                        //initial the adapter
+                        mRecyclerView.setAdapter(messageAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+                    }
+                    else {
+                        //refill the adapter
+                        ((MessageAdapter)mRecyclerView.getAdapter()).refill(mReceivedMessages);
+                    }
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity().getApplicationContext());

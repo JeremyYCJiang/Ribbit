@@ -1,9 +1,10 @@
 package com.jiangziandroid.ribbit;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -11,9 +12,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class ViewImageActivity extends ActionBarActivity {
+public class ViewImageActivity extends Activity {
 
-    @InjectView(R.id.imageView) ImageView mImageView;
+    @InjectView(R.id.imageView)
+    ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,19 @@ public class ViewImageActivity extends ActionBarActivity {
         ButterKnife.inject(this);
         Uri imageUri = getIntent().getData();
         Picasso.with(this).load(imageUri).into(mImageView);
+        //Delete image after 10s
+        //Timer timer = new Timer();
+        //timer.schedule(new TimerTask() {
+        //    @Override
+        //    public void run() {
+        //        finish();
+        //    }
+        //}, 10*1000);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(this, "Message Deleted!", Toast.LENGTH_SHORT).show();
+    }
 }
