@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -20,7 +21,7 @@ import butterknife.InjectView;
 
 public class LoginActivity extends ActionBarActivity {
 
-    @InjectView(R.id.LoginSignUpButton) Button mLoginSignUpButton;
+    @InjectView(R.id.SignUptTextView) TextView mSignUpTextView;
     @InjectView(R.id.LoginNameEditText) EditText mLoginNameEditText;
     @InjectView(R.id.LoginPwdEditText) EditText mLoginPwdEditText;
     @InjectView(R.id.LoginButton) Button mLoginButton;
@@ -30,6 +31,7 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        getSupportActionBar().hide();
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,15 +40,14 @@ public class LoginActivity extends ActionBarActivity {
                 String password = mLoginPwdEditText.getText().toString();
                 email.trim();
                 password.trim();
-                if(email.isEmpty()||password.isEmpty()){
+                if (email.isEmpty() || password.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setTitle(getString(R.string.login_error_tittle))
-                           .setMessage(getString(R.string.login_error_message))
-                           .setPositiveButton("OK", null);
+                            .setMessage(getString(R.string.login_error_message))
+                            .setPositiveButton("OK", null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }
-                else{
+                } else {
                     //Login
                     ParseUser.logInInBackground(email, password, new LogInCallback() {
                         @Override
@@ -73,7 +74,7 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
-        mLoginSignUpButton.setOnClickListener(new View.OnClickListener() {
+        mSignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);

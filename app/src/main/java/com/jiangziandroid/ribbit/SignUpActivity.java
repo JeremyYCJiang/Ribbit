@@ -31,6 +31,7 @@ public class SignUpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.inject(this);
+        getSupportActionBar().hide();
 
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,6 +30,8 @@
     <string name="title_activity_recipients">Choose Recipients</string>
     <string name="recipents_remind_label">Choose one or More friends to send your cake!</string>
     <string name="title_activity_view_image">Ribbit</string>
+    <string name="app_subTitle">A Jiangzi Project</string>
+    <string name="sign_up_text">Don\'t have an account? Sign Up!</string>
 
 
 </resources>
