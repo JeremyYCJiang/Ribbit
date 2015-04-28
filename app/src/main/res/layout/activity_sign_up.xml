@@ -3,127 +3,74 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context="com.jiangziandroid.ribbit.SignUpActivity"
-                android:background="@drawable/background_fill">
+                style="@style/AuthBackground">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/BgdImageView2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/background"
-        android:scaleType="fitStart"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:id="@+id/SignUpTitle"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:textSize="60sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"/>
+    <ImageView style="@style/AuthImageView"
+        android:id="@+id/SignUpBgdImageView"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_subTitle"
+
+    <TextView style="@style/AuthTitle"
+        android:id="@+id/SignUpTitle"/>
+
+
+    <TextView style="@style/AuthSubTitle"
         android:id="@+id/SignUpSubTitle"
-        android:layout_below="@+id/SignUpTitle"
-        android:layout_centerHorizontal="true"
-        android:textSize="13sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"/>
+        android:layout_below="@+id/SignUpTitle"/>
 
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout style="@style/AuthEditTextLinearLayout"
         android:id="@+id/EditTextLinearLayout"
-        android:layout_below="@+id/SignUpSubTitle"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"
-        android:background="@android:color/white"
-        android:layout_marginTop="20dp"
-        android:paddingTop="10dp">
+        android:layout_below="@+id/SignUpSubTitle">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
+        <EditText style="@style/AuthTextField"
             android:id="@+id/SignUpNameEditText"
             android:hint="Name"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/light_gray"
-            android:textSize="18sp"/>
+            android:inputType="textPersonName"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
+        <EditText style="@style/AuthTextField"
             android:id="@+id/SignUpEmailEditText"
             android:hint="Email"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/light_gray"
-            android:textSize="18sp"/>
+            android:inputType="textEmailAddress"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
+        <EditText style="@style/AuthTextField"
             android:id="@+id/SignUpPwdEditText"
             android:hint="Password"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/light_gray"
-            android:textSize="18sp"/>
+            android:inputType="textPassword"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <ImageView
+        android:id="@+id/buttonDivider"
+        android:layout_below="@+id/EditTextLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/button_divider"/>
+
+    <Button
+        android:id="@+id/SignUpButton"
+        android:text="Sign Up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ButtonLinearLayout"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:layout_below="@+id/EditTextLinearLayout"
-        >
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Sign Up"
-        android:id="@+id/SignUpButton"
-        android:layout_weight="1"
+        android:textSize="13sp"
+        android:textColor="@color/text_color"
         android:background="@drawable/button_custom"
-        />
+        android:layout_below="@+id/EditTextLinearLayout"
+        android:layout_toLeftOf="@+id/buttonDivider"
+        android:layout_marginLeft="10dp"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/SignUpCancelButton"
         android:text="Cancel"
-        android:id="@+id/SignUpBackButton"
-        android:layout_weight="1"
-        android:background="@drawable/button_custom"/>
-
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/text_color"
+        android:background="@drawable/button_custom"
+        android:layout_below="@+id/EditTextLinearLayout"
+        android:layout_toRightOf="@+id/buttonDivider"
+        android:layout_marginRight="10dp"/>
 
 
 </RelativeLayout>

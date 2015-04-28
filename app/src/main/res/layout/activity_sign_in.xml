@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.jiangziandroid.ribbit.LoginActivity"
+                style="@style/AuthBackground">
+
+
+    <ImageView style="@style/AuthImageView"
+        android:id="@+id/SignInBgdImageView"/>
+
+
+    <TextView style="@style/AuthTitle"
+        android:id="@+id/SignInTitle"/>
+
+
+    <TextView style="@style/AuthSubTitle"
+        android:id="@+id/SignInSubTitle"
+        android:layout_below="@+id/SignInTitle"/>
+
+
+    <LinearLayout style="@style/AuthEditTextLinearLayout"
+        android:id="@+id/EditTextLinearLayout"
+        android:layout_below="@+id/SignInSubTitle">
+
+        <EditText style="@style/AuthTextField"
+            android:id="@+id/LoginNameEditText"
+            android:hint="Username"
+            android:inputType="textPersonName"/>
+
+        <EditText style="@style/AuthTextField"
+            android:id="@+id/LoginPwdEditText"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_below="@+id/EditTextLinearLayout"
+        android:text="Sign In"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="13sp"
+        android:textColor="@color/text_color"
+        android:background="@drawable/button_custom"/>
+
+
+    <TextView
+        android:id="@+id/SignUptTextView"
+        android:layout_below="@+id/LoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_text"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="12dp"/>
+
+
+</RelativeLayout>
