@@ -1,17 +1,17 @@
 package com.jiangziandroid.ribbit;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,7 +27,8 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int TAKE_VIDEO_REQUEST = 1;
@@ -73,7 +74,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
 
         // Set up the action bar.
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
@@ -102,7 +103,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // this tab is selected.
             actionBar.addTab(
                     actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            //.setText(mSectionsPagerAdapter.getPageTitle(i))
+                            .setIcon(mSectionsPagerAdapter.getIcon(i))
                             .setTabListener(this));
         }
     }
@@ -350,23 +352,22 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
-        @Override
-        public void onTabSelected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
-            // When the given tab is selected, switch to the corresponding page in
-            // the ViewPager.
-            mViewPager.setCurrentItem(tab.getPosition());
-        }
 
-        @Override
-        public void onTabUnselected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
-        }
+    @Override
+    public void onTabSelected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
+        // When the given tab is selected, switch to the corresponding page in
+        // the ViewPager.
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
 
-        @Override
-        public void onTabReselected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
-        }
+    @Override
+    public void onTabUnselected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
+    }
 
-
- }
+    @Override
+    public void onTabReselected (ActionBar.Tab tab, FragmentTransaction fragmentTransaction){
+    }
+}
 
 
 

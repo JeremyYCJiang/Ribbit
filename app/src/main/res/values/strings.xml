@@ -14,10 +14,10 @@
     <string name="sign_up_error_title">Oops!</string>
     <string name="login_error_tittle">Oops!</string>
     <string name="login_error_message">Your email or password is null, please check!</string>
-    <string name="menu_logout_label">Logout</string>
+    <string name="menu_logout_label">Sign Out</string>
     <string name="empty_inbox_label">No new messages!</string>
     <string name="empty_friends_label">Add friends to begin!</string>
-    <string name="menu_edit_friends_label">Edit Friends</string>
+    <string name="menu_edit_friends_label">Add Friends</string>
     <string name="title_activity_edit_friends">Edit Friends</string>
     <string name="error_title">We\'re Sorry!</string>
     <string name="external_storage_error">Sorry!Please Check your external Storage.</string>
@@ -32,6 +32,7 @@
     <string name="title_activity_view_image">Ribbit</string>
     <string name="app_subTitle">A Jiangzi Project</string>
     <string name="sign_up_text">Don\'t have an account? Sign Up!</string>
+    <string name="menu_camera_label">Camera</string>
 
 
 </resources>

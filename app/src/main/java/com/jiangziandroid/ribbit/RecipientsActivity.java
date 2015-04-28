@@ -4,9 +4,9 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,7 +29,8 @@ import butterknife.InjectView;
 
 public class RecipientsActivity extends ListActivity {
 
-    @InjectView(R.id.MessageSendButton) Button mMessageSendButton;
+    //@InjectView(R.id.MessageSendButton) Button mMessageSendButton;
+    @InjectView(R.id.action_send) MenuItem mSendMenu;
     protected ParseUser mCurrentUser;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected List<ParseUser> mFriends;
@@ -85,11 +86,33 @@ public class RecipientsActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         if(l.getCheckedItemCount() == 0){
-            mMessageSendButton.setVisibility(View.INVISIBLE);
-        }else {
-            mMessageSendButton.setVisibility(View.VISIBLE);
-        }
+            //mMessageSendButton.setVisibility(View.INVISIBLE);
+            mSendMenu.setVisible(false);
 
+        }else {
+            //mMessageSendButton.setVisibility(View.VISIBLE);
+            mSendMenu.setVisible(true);
+        }
+        mSendMenu.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ParseObject message = createMessage();
+                if(message == null){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
+                    builder.setTitle("We're Sorry!")
+                            .setMessage("There was an error with the file selected, please try again!")
+                            .setPositiveButton("OK", null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else {
+                    send(message);
+                    finish();
+                }
+                return true;
+            }
+        });
+        /**
         mMessageSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +131,7 @@ public class RecipientsActivity extends ListActivity {
                 }
             }
         });
+        **/
     }
 
 

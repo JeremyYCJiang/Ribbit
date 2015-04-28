@@ -1,9 +1,9 @@
 package com.jiangziandroid.ribbit;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class SignUpActivity extends ActionBarActivity {
+public class SignUpActivity extends Activity {
 
     @InjectView(R.id.SignUpCancelButton) Button mSignUpCancelButton;
     @InjectView(R.id.SignUpButton) Button mSignUpButton;
@@ -29,7 +29,7 @@ public class SignUpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.inject(this);
-        getSupportActionBar().hide();
+        getActionBar().hide();
 
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
