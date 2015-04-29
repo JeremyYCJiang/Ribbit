@@ -61,12 +61,12 @@ public class InboxFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 }
                 if(e == null){
                     mReceivedMessages = messages;
-                    MessageAdapter messageAdapter = new MessageAdapter(getActivity().getApplicationContext(), mReceivedMessages);
+                    MessageAdapter messageAdapter = new MessageAdapter(getActivity(), mReceivedMessages);
                     mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.inboxRecyclerView);
                     if(mRecyclerView.getAdapter() == null){
                         //initial the adapter
                         mRecyclerView.setAdapter(messageAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }

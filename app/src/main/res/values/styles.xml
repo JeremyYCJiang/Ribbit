@@ -19,6 +19,7 @@
     <!--set GridView style in fragment_friends-->
     <style name="Theme.Ribbit.lightPurpleBackground">
         <item name="android:background">@color/light_purple_background</item>
+        <item name="android:padding">@dimen/user_grid_spacing</item>
         <item name="android:divider">@null</item>
     </style>
     <!--set overflow button-->
