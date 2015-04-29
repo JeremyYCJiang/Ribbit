@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.ui;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.jiangziandroid.ribbit.R;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;

@@ -1,9 +1,10 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jiangziandroid.ribbit.R;
+import com.jiangziandroid.ribbit.ui.ViewImageActivity;
+import com.jiangziandroid.ribbit.utils.ParseConstants;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by JeremyYCJiang on 2015/4/23.
@@ -67,14 +74,22 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
 
         public void bindMessage(ParseObject message) {
+            Date createAt = message.getCreatedAt();
+            long sendTime = createAt.getTime();
+            long now = new Date().getTime();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+            //formatter.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+            String sendTimeString = formatter.format(createAt);
+            String convertedDate = DateUtils.getRelativeTimeSpanString(
+                    sendTime, now, DateUtils.SECOND_IN_MILLIS).toString();
             if(message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)){
-            mMessageIcon.setImageResource(R.drawable.ic_action_picture);
+            mMessageIcon.setImageResource(R.drawable.ic_picture);
             }
             else if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_VIDEO)){
-                mMessageIcon.setImageResource(R.drawable.ic_action_play_over_video);
+                mMessageIcon.setImageResource(R.drawable.ic_video);
             }
             mMessageSenderName.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
-            mMessageSendTime.setText("Time to be added!");
+            mMessageSendTime.setText(convertedDate +"   "+ sendTimeString);
         }
 
         //private String getStringTime(Date date) {

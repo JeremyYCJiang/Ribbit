@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.ui;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.jiangziandroid.ribbit.utils.ParseConstants;
+import com.jiangziandroid.ribbit.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

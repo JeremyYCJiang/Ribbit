@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.ui;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -16,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.jiangziandroid.ribbit.utils.ParseConstants;
+import com.jiangziandroid.ribbit.R;
+import com.jiangziandroid.ribbit.adapters.SectionsPagerAdapter;
 import com.parse.ParseUser;
 
 import java.io.File;

@@ -4,9 +4,20 @@
                 android:layout_height="match_parent"
                 tools:context=".MainActivity$PlaceholderFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/inboxRecyclerView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/inboxRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_purple_background"
+            android:paddingBottom="@dimen/inbox_vertical_margin"
+            android:clipToPadding="false"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </RelativeLayout>

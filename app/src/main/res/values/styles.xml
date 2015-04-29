@@ -13,8 +13,14 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_ribbit</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Ribbit</item>
         <item name="android:actionOverflowButtonStyle">@style/Theme.Ribbit.Overflow</item>
+        <item name="android:gridViewStyle">@style/Theme.Ribbit.lightPurpleBackground</item>
     </style>
 
+    <!--set GridView style in fragment_friends-->
+    <style name="Theme.Ribbit.lightPurpleBackground">
+        <item name="android:background">@color/light_purple_background</item>
+        <item name="android:divider">@null</item>
+    </style>
     <!--set overflow button-->
     <style name="Theme.Ribbit.Overflow" parent="@android:style/Widget.ActionButton.Overflow">
           <item name="android:src">@drawable/ic_menu_overflow</item>

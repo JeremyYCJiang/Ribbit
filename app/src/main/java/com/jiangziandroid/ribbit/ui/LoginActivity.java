@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.jiangziandroid.ribbit.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;

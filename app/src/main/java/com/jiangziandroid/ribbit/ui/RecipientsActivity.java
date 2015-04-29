@@ -1,15 +1,19 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.ui;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.jiangziandroid.ribbit.R;
+import com.jiangziandroid.ribbit.utils.FileHelper;
+import com.jiangziandroid.ribbit.utils.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -24,18 +28,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
 public class RecipientsActivity extends ListActivity {
 
     //@InjectView(R.id.MessageSendButton) Button mMessageSendButton;
-    @InjectView(R.id.action_send) MenuItem mSendMenu;
     protected ParseUser mCurrentUser;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected List<ParseUser> mFriends;
     protected Uri mMediaUri;
     protected String mFileType;
+    protected MenuItem menuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,34 +84,39 @@ public class RecipientsActivity extends ListActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recipients, menu);
+        menuItem = menu.findItem(R.id.action_send);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         if(l.getCheckedItemCount() == 0){
             //mMessageSendButton.setVisibility(View.INVISIBLE);
-            mSendMenu.setVisible(false);
+            menuItem.setVisible(false);
 
         }else {
             //mMessageSendButton.setVisibility(View.VISIBLE);
-            mSendMenu.setVisible(true);
+            menuItem.setVisible(true);
         }
-        mSendMenu.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                ParseObject message = createMessage();
-                if(message == null){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
-                    builder.setTitle("We're Sorry!")
-                            .setMessage("There was an error with the file selected, please try again!")
-                            .setPositiveButton("OK", null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else {
-                    send(message);
-                    finish();
-                }
+                    ParseObject message = createMessage();
+                    if (message == null) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
+                        builder.setTitle("We're Sorry!")
+                                .setMessage("There was an error with the file selected, please try again!")
+                                .setPositiveButton("OK", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    } else {
+                        send(message);
+                        finish();
+                    }
                 return true;
             }
         });

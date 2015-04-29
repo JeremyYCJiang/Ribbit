@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.utils;
 
 /**
  * Created by JeremyYCJiang on 2015/4/20.

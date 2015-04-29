@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

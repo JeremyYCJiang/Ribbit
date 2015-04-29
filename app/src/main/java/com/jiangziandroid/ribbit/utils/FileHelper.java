@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

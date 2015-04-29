@@ -1,4 +1,4 @@
-package com.jiangziandroid.ribbit;
+package com.jiangziandroid.ribbit.adapters;
 
 /**
  * Created by JeremyYCJiang on 2015/4/18.
@@ -8,6 +8,10 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.jiangziandroid.ribbit.R;
+import com.jiangziandroid.ribbit.ui.FriendsFragment;
+import com.jiangziandroid.ribbit.ui.InboxFragment;
 
 import java.util.Locale;
 
