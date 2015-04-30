@@ -4,47 +4,23 @@
                 android:layout_height="match_parent"
                 tools:context="com.jiangziandroid.ribbit.ui.RecipientsActivity">
 
-    <TextView
-        android:id="@+id/RemindUserLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/recipents_remind_label"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:gravity="center_horizontal"
-        android:background="#ff90df51"
-        android:layout_marginBottom="5dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"/>
-
-
-    <ListView
-        android:id="@android:id/list"
+    <GridView
+        android:id="@+id/usersGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/RemindUserLabel"
-        android:layout_above="@+id/MessageSendButton"/>
+        android:layout_alignParentStart="true"
+        android:numColumns="3"
+        android:horizontalSpacing="@dimen/user_grid_spacing"
+        android:verticalSpacing="@dimen/user_grid_spacing"
+        android:clipToPadding="false">
+    </GridView>
 
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/empty_friends_label"
-        android:layout_centerInParent="true"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send!"
-        android:id="@+id/MessageSendButton"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:background="#ff1ca3df"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+        android:text="@string/empty_friends_label"/>
 
 </RelativeLayout>

@@ -62,12 +62,6 @@ public class EditFriendsActivity extends Activity {
                 if(e == null){
                     //Success
                     mParseUsers = parseUsers;
-                    //String[] usernames = new String[mParseUsers.size()];
-                    //int i = 0;
-                    //for(ParseUser parseUser : parseUsers){
-                    //    usernames[i] = parseUser.getUsername();
-                    //    i++;
-                    //}
                     if(mGridView.getAdapter() == null){
                         UserAdapter adapter = new UserAdapter(EditFriendsActivity.this, mParseUsers);
                         mGridView.setAdapter(adapter);
