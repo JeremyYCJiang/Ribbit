@@ -5,15 +5,14 @@
                 android:background="@android:color/white">
 
 
-    <ImageView
+    <ImageView style="@style/GridImage"
         android:id="@+id/userPhotoImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/avatar_empty"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"/>
+        android:src="@drawable/avatar_empty"/>
+
+    <ImageView style="@style/GridImage"
+        android:id="@+id/userPhotoSelectedImageView"
+        android:src="@drawable/avatar_selected"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/usernameLabelTextView"

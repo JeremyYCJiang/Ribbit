@@ -53,7 +53,7 @@ public class FriendsFragment extends Fragment{
                @Override
                public void done(List<ParseUser> friends, ParseException e) {
                    if (e == null) {
-                       //mFriends = friends;
+                       mFriends = friends;
                        //String[] usernames = new String[mFriends.size()];
                        //int i = 0;
                        //for (ParseUser friend : mFriends) {
@@ -61,11 +61,11 @@ public class FriendsFragment extends Fragment{
                        //    i++;
                        //}
                        if(mGridView.getAdapter() == null){
-                           UserAdapter adapter = new UserAdapter(getActivity(), friends);
+                           UserAdapter adapter = new UserAdapter(getActivity(), mFriends);
                            mGridView.setAdapter(adapter);
                        }
                        else {
-                           ((UserAdapter)mGridView.getAdapter()).refill(friends);
+                           ((UserAdapter)mGridView.getAdapter()).refill(mFriends);
                        }
                    }
                    else {
