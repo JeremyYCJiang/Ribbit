@@ -66,7 +66,7 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
             // To use these options, just pass one of the following keywords as the d= parameter to an image request:
             // 404: do not load any image if none is associated with the email hash, instead return an
             // HTTP 404 (File Not Found) response
-            String gravatarUrl = "http://www.gravatar.com/avatar/"+ hash + "?=204&=404";
+            String gravatarUrl = "http://www.gravatar.com/avatar/"+ hash + "?s=204&d=404";
             Log.d("URL Check :", gravatarUrl);
             Picasso.with(getContext())
                    .load(gravatarUrl)

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jiangziandroid.ribbit.R;
+import com.jiangziandroid.ribbit.RibbitApplication;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -53,12 +54,13 @@ public class LoginActivity extends Activity {
                         public void done(ParseUser parseUser, ParseException e) {
                             if (parseUser != null) {
                                 // Hooray! The user is logged in.
+                                RibbitApplication.updateParseInstallation(parseUser);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             } else {
-                                // Signup failed. Look at the ParseException to see what happened.
+                                // Signin failed. Look at the ParseException to see what happened.
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setTitle(getString(R.string.login_error_tittle))
                                         .setMessage(e.getMessage())

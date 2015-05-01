@@ -12,7 +12,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="sign_up_error_message">"Your input has empty area, please check! "</string>
     <string name="sign_up_error_title">Oops!</string>
-    <string name="login_error_tittle">Oops!</string>
+    <string name="login_error_tittle">Oops! Signin failed.</string>
     <string name="login_error_message">Your email or password is null, please check!</string>
     <string name="menu_logout_label">Sign Out</string>
     <string name="empty_inbox_label">No new messages!</string>
@@ -33,6 +33,7 @@
     <string name="app_subTitle">A Jiangzi Project</string>
     <string name="sign_up_text">Don\'t have an account? Sign Up!</string>
     <string name="menu_camera_label">Camera</string>
+    <string name="push_message">You have a new Ribbit message from %s!</string>
 
 
 </resources>

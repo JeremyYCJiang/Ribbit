@@ -20,12 +20,15 @@ import com.jiangziandroid.ribbit.utils.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.ProgressCallback;
 import com.parse.SaveCallback;
+import com.parse.SendCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,6 +182,7 @@ public class RecipientsActivity extends Activity {
                     //Success
                     Toast.makeText(RecipientsActivity.this, "Successfully send file to Parse.com ^.^",
                             Toast.LENGTH_LONG).show();
+                    sendPushNotifications();
                 } else {
                     //Failed
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
@@ -210,6 +214,27 @@ public class RecipientsActivity extends Activity {
                             .setPositiveButton("OK", null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                }
+            }
+        });
+    }
+
+    protected void sendPushNotifications(){
+        ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
+        query.whereContainedIn(ParseConstants.KEY_USER_ID, getRecipientIds());
+        //send push notifications
+        ParsePush push = new ParsePush();
+        push.setQuery(query);
+        push.setMessage(getString(R.string.push_message, ParseUser.getCurrentUser().getUsername()));
+        push.sendInBackground(new SendCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e==null){
+                    Toast.makeText(RecipientsActivity.this, "Push Successful!", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(RecipientsActivity.this, "Push Failed!" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });

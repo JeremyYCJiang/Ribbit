@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.jiangziandroid.ribbit.R;
+import com.jiangziandroid.ribbit.RibbitApplication;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -64,6 +65,7 @@ public class SignUpActivity extends Activity {
                         public void done(ParseException e) {
                             if (e == null) {
                                 // Hooray! Let them use the app now.
+                                RibbitApplication.updateParseInstallation(ParseUser.getCurrentUser());
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

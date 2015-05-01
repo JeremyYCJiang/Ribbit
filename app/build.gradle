@@ -4,6 +4,16 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
     defaultConfig {
         applicationId "com.jiangziandroid.ribbit"
         minSdkVersion 15
@@ -13,8 +23,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true;
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
         }
     }
 }
@@ -25,4 +36,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.android.support:recyclerview-v7:22.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile "com.google.android.gms:play-services:7.3.0"
 }
