@@ -18,6 +18,7 @@ public class RibbitApplication extends Application{
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "lzqxZmJ61vrWyoBTj9Kmo9BYxiMZ8X9nB4DAsmQt", "0Te44SxLbw0Y8XTBzdylgX2gUB6h6c4tGkesCDn8");
+        //com.parse.PushService.setDefaultPushCallback(this, MainActivity.class, R.drawable.ic_stat_ic_launcher);
         ParseInstallation.getCurrentInstallation().saveInBackground(new com.parse.SaveCallback() {
             @Override
             public void done(ParseException e) {
