@@ -36,15 +36,15 @@ public class SignUpActivity extends Activity {
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = mSignUpNameEditText.getText().toString();
+                String username = mSignUpNameEditText.getText().toString();
                 String email = mSignUpEmailEditText.getText().toString();
                 String password = mSignUpPwdEditText.getText().toString();
                 //remove only the spaces at the beginning or end of the String (not the ones in the middle).
-                name = name.trim();
+                username = username.trim();
                 email = email.trim();
                 password = password.trim();
                 //check if the user input is empty
-                if(name.isEmpty()||email.isEmpty()||password.isEmpty()){
+                if(username.isEmpty()||email.isEmpty()||password.isEmpty()){
                     // 1. Instantiate an AlertDialog.Builder with its constructor
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     // 2. Chain together various setter methods to set the dialog characteristics
@@ -57,7 +57,7 @@ public class SignUpActivity extends Activity {
                 }else {
                     //create the new user!
                     ParseUser newUser = new ParseUser();
-                    newUser.setUsername(name);
+                    newUser.setUsername(username);
                     newUser.setPassword(password);
                     newUser.setEmail(email);
                     newUser.signUpInBackground(new SignUpCallback() {

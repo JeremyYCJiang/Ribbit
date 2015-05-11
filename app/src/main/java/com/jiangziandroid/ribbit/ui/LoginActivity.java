@@ -29,18 +29,18 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_log_in);
         ButterKnife.inject(this);
         getActionBar().hide();
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mLoginNameEditText.getText().toString();
+                String username = mLoginNameEditText.getText().toString();
                 String password = mLoginPwdEditText.getText().toString();
-                email.trim();
+                username.trim();
                 password.trim();
-                if (email.isEmpty() || password.isEmpty()) {
+                if (username.isEmpty() || password.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setTitle(getString(R.string.login_error_tittle))
                             .setMessage(getString(R.string.login_error_message))
@@ -49,7 +49,7 @@ public class LoginActivity extends Activity {
                     dialog.show();
                 } else {
                     //Login
-                    ParseUser.logInInBackground(email, password, new LogInCallback() {
+                    ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser parseUser, ParseException e) {
                             if (parseUser != null) {
